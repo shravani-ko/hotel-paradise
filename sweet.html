@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sweets Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8e1;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f57c00;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+    .dish {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 15px;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+    }
+    .dish img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .dish h3 {
+      margin-bottom: 10px;
+    }
+    .price {
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .add-to-cart {
+      background-color: #f57c00;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .add-to-cart:hover {
+      background-color: #ef6c00;
+    }
+    .go-to-cart {
+      display: block;
+      margin: 30px auto;
+      width: max-content;
+      padding: 12px 25px;
+      background-color: #ef6c00;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🍬 Sweets Menu 🍰🍭</h1>
+  </header>
+
+  <div class="menu">
+    <div class="dish">
+      <img src="g.jpg" alt="Gulab Jamun"/>
+      <h3>Gulab Jamun</h3>
+      <div class="price">₹60</div>
+      <button class="add-to-cart" onclick="addToCart('Gulab Jamun', 60, 'g.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="r.jpg" alt="Rasgulla"/>
+      <h3>Rasgulla</h3>
+      <div class="price">₹50</div>
+      <button class="add-to-cart" onclick="addToCart('Rasgulla', 50, 'r.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="k.jpg" alt="Kaju Katli"/>
+      <h3>Kaju Katli</h3>
+      <div class="price">₹70</div>
+      <button class="add-to-cart" onclick="addToCart('Kaju Katli', 70, 'k.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="rr.jpg" alt="Rasmalai"/>
+      <h3>Rasmalai</h3>
+      <div class="price">₹80</div>
+      <button class="add-to-cart" onclick="addToCart('Rasmalai', 80, 'rr.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="m.jpg" alt="Motichoor Laddu"/>
+      <h3>Motichoor Laddu</h3>
+      <div class="price">₹40</div>
+      <button class="add-to-cart" onclick="addToCart('Motichoor Laddu', 40, 'm.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="j.jpg" alt="Jalebi"/>
+      <h3>Jalebi</h3>
+      <div class="price">₹30</div>
+      <button class="add-to-cart" onclick="addToCart('Jalebi', 30, 'j.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="b.jpg" alt="Barfi"/>
+      <h3>Barfi</h3>
+      <div class="price">₹50</div>
+      <button class="add-to-cart" onclick="addToCart('Barfi', 50, 'b.jpg')">🛒 Add to Cart</button>
+    </div>
+
+    <div class="dish">
+      <img src="s.jpg" alt="Soan Papdi"/>
+      <h3>Soan Papdi</h3>
+      <div class="price">₹35</div>
+      <button class="add-to-cart" onclick="addToCart('Soan Papdi', 35, 's.jpg')">🛒 Add to Cart</button>
+    </div>
+  </div>
+
+  <a href="cart.html" class="go-to-cart">🛍️ Go to Cart</a>
+
+  <script>
+    function addToCart(title, price, image) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ title, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${title} added to cart!`);
+    }
+  </script>
+
+</body>
+</html>

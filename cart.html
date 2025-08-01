@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+    .cart-details {
+      flex: 1;
+      margin-left: 20px;
+    }
+    .cart-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .cart-price {
+      color: #555;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .total {
+      text-align: right;
+      font-size: 1.5rem;
+      padding: 20px;
+    }
+    .btn-back {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      background-color: #4a90e2;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🛒 Your Cart</header>
+
+  <div class="container" id="cartContainer"></div>
+
+  <div class="container total">
+    <div id="totalPrice">Total: ₹0.00</div>
+    <a href="snacks.html" class="btn-back">← Back to Menu</a>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+      const container = document.getElementById("cartContainer");
+      const totalDisplay = document.getElementById("totalPrice");
+
+      if (cart.length === 0) {
+        container.innerHTML = "<p style='text-align:center;'>🛍️ Your cart is empty</p>";
+        totalDisplay.innerText = "Total: ₹0.00";
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map((item, index) => {
+        total += item.price;
+        return `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.title}" />
+            <div class="cart-details">
+              <div class="cart-title">${item.title}</div>
+              <div class="cart-price">₹${item.price.toFixed(2)}</div>
+            </div>
+            <button class="remove-btn" onclick="removeItem(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
+      }).join("");
+
+      totalDisplay.innerText = `Total: ₹${total.toFixed(2)}`;
+    }
+
+    function removeItem(index) {
+      if (confirm("Remove this item from cart?")) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+    }
+
+    renderCart();
+  </script>
+
+</body>
+</html>
